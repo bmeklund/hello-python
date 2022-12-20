@@ -1,0 +1,38 @@
+schemaVersion: 2.1.0
+metadata:
+  name: python
+  displayName: Python
+  projectType: Python
+  version: 1.0.0
+starterProjects:
+  - name: hello-python
+    git:
+      remotes:
+        origin: https://github.com/bmeklund/hello-python
+components:
+  - name: py
+    container:
+      image: registry.access.redhat.com/ubi9/python-39:latest
+      args: ['tail', '-f', '/dev/null']
+      mountSources: true
+      endpoints:
+        - name: http-python
+          targetPort: 8000
+commands:
+  - id: pip-install-requirements
+    exec:
+      commandLine: pip install -r requirements.txt
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: build
+        isDefault: true
+      component: py
+  - id: run-app
+    exec:
+      commandLine: 'python manage.py runserver 0.0.0.0:8000'
+      workingDir: ${PROJECT_SOURCE}
+      component: py
+      group:
+        kind: run
+        isDefault: true
+ 
