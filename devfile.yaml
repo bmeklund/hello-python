@@ -3,7 +3,9 @@ metadata:
   name: python
   displayName: Python
   projectType: Python
-  version: 1.0.0
+  provider: Red Hat
+  language: Python
+  version: 2.1.0
 starterProjects:
   - name: hello-python
     git:
